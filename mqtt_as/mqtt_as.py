@@ -636,7 +636,7 @@ class MQTTClient(MQTT_base):
                 await self._connect(True)  # Connect with clean session
                 try:
                     async with self.lock:
-                        self._sock.write(b"\xe0\0")  # Force disconnect but keep socket open
+                        await self._sock.write(b"\xe0\0")  # Force disconnect but keep socket open
                 except OSError:
                     pass
                 self.dprint("Waiting for disconnect")
